@@ -24,30 +24,33 @@ console.log(
 );
 
 const app = express();
+const corsOptions = {
+  origin: "https://git.heroku.com/damp-garden-24642.git",
+};
 
 app.use(express.json());
 app.use(cors());
 
-app.get("/", cors(), (req, res) => {
+app.get("/", cors(corsOptions), (req, res) => {
   // res.send(database.users);
   res.send("it's working");
 });
 
-app.post("/signin", signin.handleSignin(db, bcrypt));
+app.post("/signin", cors(corsOptions), signin.handleSignin(db, bcrypt));
 
-app.post("/register", (req, res) => {
+app.post("/register", cors(corsOptions), (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
 
-app.get("/profile/:id", (req, res) => {
+app.get("/profile/:id", cors(corsOptions), (req, res) => {
   profile.handleProfileGet(req, res, db);
 });
 
-app.put("/image", (req, res) => {
+app.put("/image", cors(corsOptions), (req, res) => {
   image.handleImage(req, res, db);
 });
 
-app.post("/imageurl", (req, res) => {
+app.post("/imageurl", cors(corsOptions), (req, res) => {
   image.handleApiCall(req, res);
 });
 
