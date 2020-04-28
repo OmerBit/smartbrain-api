@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt-nodejs");
-import cors from "cors";
+const cors = require("cors");
 const knex = require("knex");
 
 const register = require("./controllers/register");
@@ -33,7 +33,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.options("*", cors());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
