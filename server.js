@@ -24,9 +24,9 @@ console.log(
 );
 
 const app = express();
-const corsOptions = {
-  origin: "http://localhost:3000",
-};
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+// };
 // const corsOptions = {
 //   origin: "https://git.heroku.com/damp-garden-24642.git",
 // };
@@ -37,6 +37,10 @@ app.use(cors());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, Content-Length, X-Requested-With"
@@ -52,26 +56,30 @@ app.use(function (req, res, next) {
 
 app.options("*", cors());
 
-app.get("/", cors(corsOptions), (req, res) => {
+app.get("/", (req, res) => {
   // res.send(database.users);
   res.send("it's working");
 });
+// app.get("/", cors(corsOptions), (req, res) => {
+//   // res.send(database.users);
+//   res.send("it's working");
+// });
 
-app.post("/signin", cors(corsOptions), signin.handleSignin(db, bcrypt));
+app.post("/signin", signin.handleSignin(db, bcrypt));
 
-app.post("/register", cors(corsOptions), (req, res) => {
+app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
 
-app.get("/profile/:id", cors(corsOptions), (req, res) => {
+app.get("/profile/:id", (req, res) => {
   profile.handleProfileGet(req, res, db);
 });
 
-app.put("/image", cors(corsOptions), (req, res) => {
+app.put("/image", (req, res) => {
   image.handleImage(req, res, db);
 });
 
-app.post("/imageurl", cors(corsOptions), (req, res) => {
+app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
