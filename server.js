@@ -35,7 +35,10 @@ app.use(express.json());
 app.use(cors());
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://git.heroku.com/damp-garden-24642.git"
+  );
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
@@ -53,8 +56,6 @@ app.use(function (req, res, next) {
     next();
   }
 });
-
-app.options("*", cors());
 
 app.get("/", (req, res) => {
   // res.send(database.users);
