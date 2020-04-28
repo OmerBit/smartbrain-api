@@ -25,15 +25,10 @@ console.log(
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
-  next();
-});
-
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/", cors(), (req, res) => {
   // res.send(database.users);
   res.send("it's working");
 });
