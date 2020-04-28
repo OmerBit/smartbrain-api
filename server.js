@@ -25,8 +25,11 @@ console.log(
 
 const app = express();
 const corsOptions = {
-  origin: "https://git.heroku.com/damp-garden-24642.git",
+  origin: "http://localhost",
 };
+// const corsOptions = {
+//   origin: "https://git.heroku.com/damp-garden-24642.git",
+// };
 
 app.use(express.json());
 app.use(cors());
