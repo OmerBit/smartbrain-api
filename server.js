@@ -31,6 +31,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors());
 
+app.options("*", cors());
+
 app.get("/", cors(corsOptions), (req, res) => {
   // res.send(database.users);
   res.send("it's working");
